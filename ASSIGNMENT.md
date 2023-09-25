@@ -23,10 +23,11 @@ In this combined assignment, you will create a simple dashboard on a separate we
    - Apply appropriate visual encoding techniques to enhance information communication.
 
 3. **Dashboard Implementation**
-   - Using vanilla JavaScript and Bootstrap implement the screens of your dashboard as individual pages, using `index.html` as the home page.
-   - Use separate files graphics you create
-   - Implement using D3 data join at least one table, one minimalistic bar chart and one minimalistic bubble chart. minimalistic axes should be created using an SVG line with few tick marks, tick mark labels and one axis label using D3. The proportional symbol map you can create using D3 bubbles layer on top of a world map image set as an svg image.
+   - Using vanilla JavaScript and Bootstrap, implement the screens of your dashboard as individual pages, using `index.html` as the home page.
+   - Use separate JavaScript files for the graphics you create
+   - Implement using D3 data join at least one table, one minimalistic bar chart, and one minimalistic bubble chart. Minimalistic axes should be created using an SVG line with tick marks, tick mark labels, and axis labels using D3.
    - Use Bootstrap to customize the page according to your design.
+   - Extra credit to implement a proportional symbol map using a D3 bubbles layer on top of a world map image (you can load images in SVG using the &lt;image&gt; SVG element).
 
 ## Submission
 
