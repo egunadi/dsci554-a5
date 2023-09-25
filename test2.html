@@ -1,0 +1,136 @@
+<!-- can you create the table here using d3 instead -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressive Dashboard</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add D3.js library -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="table.js"></script>
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #f4f4f4;
+            font-family: "Helvetica Neue", sans-serif;
+        }
+
+        /* Dashboard Header */
+        .dashboard-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        /* Card Styles */
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 20px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Chart and Table Styles */
+        .chart-container {
+            text-align: center;
+        }
+
+        .chart-title {
+            font-size: 18px;
+        }
+
+        /* Custom Button Styles */
+        .btn-custom {
+            background-color: #ff5722;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #e64a19;
+        }
+
+        /* Table Styles */
+        .table-custom {
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        /* Chart and Graph Styling */
+        .chart {
+            max-width: 90%; /* Allow the chart to expand to 90% of its container */
+            height: auto;
+        }
+
+        /* Map Styles */
+        .world-map {
+            max-width: 100%;
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 768px) {
+            .chart-container {
+                padding: 10px;
+            }
+        }
+
+        /* Custom CSS to move the container to the right */
+        .chart-container {
+            margin-left: 20px; /* Adjust the margin as needed */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Dashboard Header -->
+        <div class="row dashboard-header">
+            <div class="col">
+                <h1 class="mt-4">Impressive Dashboard</h1>
+            </div>
+        </div>
+        <!-- Second Row -->
+        <div class="row mt-4">
+            <div class="col-md-6"> <!-- Make each card take up half of the row -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Table</h5>
+                        <!-- Replace the existing table with an empty div -->
+                        <div class="table-responsive">
+                            <div id="table-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

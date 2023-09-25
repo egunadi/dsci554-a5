@@ -82,3 +82,9 @@ body {
         padding: 10px;
     }
 }
+
+/* Custom CSS to move the container to the right */
+.chart-container {
+    margin-left: 20px; /* Adjust the margin as needed */
+    text-align: center;
+}

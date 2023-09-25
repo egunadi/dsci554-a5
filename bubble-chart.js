@@ -10,7 +10,7 @@ var bubbleChartData = [
 function createBubbleChart() {
     var marginBubble = { top: 20, right: 20, bottom: 40, left: 40 };
     var widthBubble = document.getElementById("bubble-chart").offsetWidth - marginBubble.left - marginBubble.right;
-    var heightBubble = 200 - marginBubble.top - marginBubble.bottom;
+    var heightBubble = 350 - marginBubble.top - marginBubble.bottom;
 
     var svgBubble = d3.select("#bubble-chart")
         .html("") // Clear the existing chart

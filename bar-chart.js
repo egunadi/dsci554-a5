@@ -5,7 +5,7 @@ var barChartData = [10, 20, 15, 25, 30];
 function createBarChart() {
     var marginBar = { top: 20, right: 20, bottom: 40, left: 40 };
     var widthBar = document.getElementById("bar-chart").offsetWidth - marginBar.left - marginBar.right;
-    var heightBar = 150 - marginBar.top - marginBar.bottom;
+    var heightBar = 350 - marginBar.top - marginBar.bottom;
 
     var svgBar = d3.select("#bar-chart")
         .html("") // Clear the existing chart
