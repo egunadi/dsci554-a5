@@ -16,13 +16,14 @@ function createWorldMap() {
 
     var path = d3.geoPath().projection(projection);
 
-    // Draw the world map
+    // Draw the world map with a class for styling
     d3.json("https://raw.githubusercontent.com/d3/d3.github.com/master/world-110m.v1.json").then(function (world) {
         svgMap.selectAll("path")
             .data(topojson.feature(world, world.objects.countries).features)
             .enter().append("path")
             .attr("d", path)
-            .attr("class", "country");
+            .attr("class", "country")
+            .style("fill", "rgba(0, 0, 0, 0.1)"); // Adjust the opacity as needed
     });
 
     // Add bubbles to the map
