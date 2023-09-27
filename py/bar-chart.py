@@ -1,6 +1,6 @@
 import pandas as pd
 
-def export_statistics():
+def export_gdp_per_capita():
     population_filepath = '../data/population.original.csv'
     gdp_filepath = '../data/gdp.original.csv'
     
@@ -36,21 +36,23 @@ def export_statistics():
     
     gdp_df = gdp_df_japan.merge(gdp_df_korea, on='Year')
     
-    population_statistics_df = population_df.describe() \
-                                            .reset_index() \
-                                            .rename(columns={'index': 'Attrib'})
-                                            
-    population_statistics_df['Attrib'] = 'population_' + population_statistics_df['Attrib']              
+    population_df_unpivot = pd.melt(population_df, id_vars='Year', value_vars=['Japan', 'Korea'])
+    population_df_unpivot = population_df_unpivot.rename(columns={'variable': 'Country', 'value': 'Population'})
     
-    gdp_statistics_df = gdp_df.describe() \
-                              .reset_index() \
-                              .rename(columns={'index': 'Attrib'})
-                              
-    gdp_statistics_df['Attrib'] = 'gdp_' + gdp_statistics_df['Attrib']
+    gdp_df_unpivot = pd.melt(gdp_df, id_vars='Year', value_vars=['Japan', 'Korea'])
+    gdp_df_unpivot = gdp_df_unpivot.rename(columns={'variable': 'Country', 'value': 'GDP'})
     
-    statistics_df = pd.concat([population_statistics_df, gdp_statistics_df])
+    combined_df = population_df_unpivot.merge(gdp_df_unpivot, on=['Year','Country'])
     
-    statistics_df.to_json('../data/statistics.json', orient='records')
+    combined_df['GDP_per_Capita'] = combined_df['GDP'] / combined_df['Population']
+    
+    combined_df_simplified = combined_df[combined_df['Year'].isin([1970, 1980, 1990, 2000, 2010, 2020])]
+    
+    combined_df_simplified = combined_df_simplified[['Year', 'Country', 'GDP_per_Capita']]
+    
+    # combined_df_simplified.to_json('../data/gdp_per_capita.json', orient='records')
+    
+    combined_df_simplified.to_csv('../data/gdp_per_capita.csv', index=False)
 
 if __name__ == '__main__':
-    export_statistics()
+    export_gdp_per_capita()
