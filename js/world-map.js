@@ -1,4 +1,3 @@
-// Create the world map with bubbles
 function createWorldMap() {
     var widthMap = document.getElementById("world-map").offsetWidth;
     var heightMap = 400;
@@ -9,10 +8,11 @@ function createWorldMap() {
         .attr("width", widthMap)
         .attr("height", heightMap);
 
-    // Define a projection (equirectangular) for the world map
-    var projection = d3.geoEquirectangular()
-        .scale(100)
-        .translate([widthMap / 2, heightMap / 2]);
+    // Define a projection centered on Japan and Korea
+    var projection = d3.geoMercator()
+        .scale(400) // Adjust the scale as needed
+        .translate([widthMap / 2, heightMap / 2])
+        .center([137, 37]) // Center coordinates for Japan
 
     var path = d3.geoPath().projection(projection);
 
@@ -27,11 +27,7 @@ function createWorldMap() {
     });
 
     // Add bubbles to the map
-    var bubbleData = [
-        { name: "City A", lat: 40, lon: -74, radius: 10 },
-        { name: "City B", lat: 51, lon: 0, radius: 15 },
-        { name: "City C", lat: -25, lon: 133, radius: 20 },
-    ];
+    var bubbleData = [{"Country":"Japan","radius":35.3899365639,"lat":36.2048,"lon":138.2529},{"Country":"Korea","radius":22.7694290662,"lat":35.9078,"lon":127.7669}];
 
     var bubbleGroup = svgMap.append("g");
 
@@ -42,7 +38,7 @@ function createWorldMap() {
         .attr("cx", function (d) { return projection([d.lon, d.lat])[0]; })
         .attr("cy", function (d) { return projection([d.lon, d.lat])[1]; })
         .attr("r", function (d) { return d.radius; })
-        .attr("fill", "#ff5722")
+        .attr("fill", function (d) { return (d.Country === "Japan") ? "steelblue" : "orange"; })
         .attr("stroke", "#fff")
         .attr("stroke-width", 2);
 }
