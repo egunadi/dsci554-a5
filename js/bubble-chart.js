@@ -1,9 +1,9 @@
-// Sample data for the bubble chart
+// Sample data for the bubble chart with different circle areas
 var bubbleChartData = [
-    { x: 10, y: 20, r: 10 },
-    { x: 30, y: 15, r: 15 },
-    { x: 50, y: 25, r: 20 },
-    { x: 70, y: 10, r: 25 },
+    { year: 2010, value: 20, color: "blue", radius: 10 },
+    { year: 2011, value: 15, color: "orange", radius: 15 },
+    { year: 2012, value: 25, color: "blue", radius: 20 },
+    { year: 2013, value: 10, color: "orange", radius: 25 },
 ];
 
 // Create the bubble chart
@@ -20,19 +20,23 @@ function createBubbleChart() {
         .append("g")
         .attr("transform", "translate(" + marginBubble.left + "," + marginBubble.top + ")");
 
+    // Add padding to the X-axis scale
     var xScaleBubble = d3.scaleLinear()
-        .domain([0, d3.max(bubbleChartData, function (d) { return d.x; })])
+        .domain([2009, 2014]) // Set the year range with padding
         .range([0, widthBubble]);
 
     var yScaleBubble = d3.scaleLinear()
-        .domain([0, d3.max(bubbleChartData, function (d) { return d.y; })])
+        .domain([0, d3.max(bubbleChartData, function (d) { return d.value; })])
         .range([heightBubble, 0]);
+
+    // Define the tick values for the X-axis
+    var xAxisTicks = [2010, 2011, 2012, 2013];
 
     // Add X and Y axes
     svgBubble.append("g")
         .attr("class", "x-axis")
         .attr("transform", "translate(0," + heightBubble + ")")
-        .call(d3.axisBottom(xScaleBubble));
+        .call(d3.axisBottom(xScaleBubble).tickValues(xAxisTicks).tickFormat(d3.format("d"))); // Format X-axis as years
 
     svgBubble.append("g")
         .attr("class", "y-axis")
@@ -43,8 +47,33 @@ function createBubbleChart() {
         .enter()
         .append("circle");
 
-    circles.attr("cx", function (d) { return xScaleBubble(d.x); })
-        .attr("cy", function (d) { return yScaleBubble(d.y); })
-        .attr("r", function (d) { return d.r; })
-        .style("fill", "#007bff");
+    circles.attr("cx", function (d) { return xScaleBubble(d.year); })
+        .attr("cy", function (d) { return yScaleBubble(d.value); })
+        .attr("r", function (d) { return d.radius; }) // Use different radii for circles
+        .style("fill", function (d) { return (d.color === "blue") ? "steelblue" : "orange"; }); // Circle color based on data
+
+    // Add legend (you can customize this)
+    const legend = svgBubble.append("g")
+        .attr("transform", `translate(10, 10)`); // Adjust the translation values
+
+    legend.append("rect")
+        .attr("width", 20)
+        .attr("height", 20)
+        .attr("fill", "steelblue");
+
+    legend.append("text")
+        .attr("x", 30)
+        .attr("y", 10)
+        .text("Japan");
+
+    legend.append("rect")
+        .attr("width", 20)
+        .attr("height", 20)
+        .attr("x", 90)
+        .attr("fill", "orange");
+
+    legend.append("text")
+        .attr("x", 120)
+        .attr("y", 10)
+        .text("Korea");
 }
