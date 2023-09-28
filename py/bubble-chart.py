@@ -1,6 +1,6 @@
 import pandas as pd
 
-def export_gdp_per_capita():
+def export_population_gdp():
     population_filepath = '../data/population.original.csv'
     gdp_filepath = '../data/gdp.original.csv'
     
@@ -44,13 +44,9 @@ def export_gdp_per_capita():
     
     combined_df = population_df_unpivot.merge(gdp_df_unpivot, on=['Year','Country'])
     
-    combined_df['GDP_per_Capita'] = combined_df['GDP'] / combined_df['Population']
+    combined_df = combined_df[combined_df['Year'].isin([1970, 1980, 1990, 2000, 2010, 2020])]
     
-    combined_df_simplified = combined_df[combined_df['Year'].isin([1970, 1980, 1990, 2000, 2010, 2020])]
-    
-    combined_df_simplified = combined_df_simplified[['Year', 'Country', 'GDP_per_Capita']]
-    
-    combined_df_simplified.to_json('../data/gdp_per_capita.json', orient='records')
-    
+    combined_df.to_json('../data/population_gdp.json', orient='records')
+
 if __name__ == '__main__':
-    export_gdp_per_capita()
+    export_population_gdp()
